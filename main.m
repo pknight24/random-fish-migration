@@ -1,12 +1,15 @@
 function [results] = main(nsims = 100)
-  initial_temps = randn(15, 1) .* 2 .+ 10
-  initial_node = 14
-  opt = 1
+  temps;
+  initial_temps = JAN;
+  opt = 12.5
   R = 0.01;
-  nt = 5;
-  results = zeros(length(initial_temps), 1);
-  for i = 1:nsims
-    results = results + simulate(initial_node, initial_temps, opt, nt, R);
+  nt = 50;
+  results = zeros(length(initial_temps), 15);
+  for i = 1:15
+    initial_node = i
+    for j = 1:nsims
+      results(:,i) = results(:,i) + simulate(initial_node, initial_temps, opt, nt, R);
+    end
   end
   
 end

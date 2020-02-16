@@ -12,10 +12,10 @@ function [final] = simulate(initial_node, initial_temps, opt, nt, R)
     for i = 1:n
       if i == 1
 	if guess < interval_vector(i)
-	  next_node = 1
+	  next_node = 1;
 	end
       elseif (interval_vector(i - 1) < guess) && (guess < interval_vector(i))
-	next_node = i
+	next_node = i;
       end
     end
     position_vec = zeros(n,1);
@@ -25,7 +25,7 @@ function [final] = simulate(initial_node, initial_temps, opt, nt, R)
     current_temps = update_temps(initial_temps, R);
     P = build_p(current_temps, opt);
     if t == nt
-      ended_on = next_node
+      ended_on = next_node; % in case we want to print the final node
     end
     
   end
