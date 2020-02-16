@@ -3,5 +3,5 @@ function [new_temps] = update_temps(current_temps, R)
 end
 
 function [fR] = f(R)
-  fR = R + randn(1); % add gaussian noise, just for fun
+  fR = R;
 end
