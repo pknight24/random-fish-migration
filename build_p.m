@@ -5,7 +5,7 @@ function [P] = build_p(current_temps, opt)
     probs = zeros(n, 1); % create the probability vector corresponding to node i
     scores = compute_scores(i, current_temps, opt); % compute relative scores
     scores(scores <= 0) = 0; % remove the bad scores
-    scores(1 - get_adj()(:,i)) = 0; % filter out the nodes that are not connected
+    scores(logical(1 .- get_adj()(:,i))) = 0; % filter out the nodes that are not connected
     total = sum(scores);
     if total == 0
       probs(i) = 1; % if there are no superior nodes, we stay at the current node
@@ -23,7 +23,7 @@ end
 function [scores] = compute_scores(i, current_temps, opt)
   scores = zeros(length(current_temps), 1);
   for j = 1:length(current_temps) 
-      score(j) = abs(current_temps[i] - opt) - abs(current_temps[j] - opt);
-    end
+    scores(j) = abs(current_temps(i) - opt) - abs(current_temps(j) - opt);
+  end
 end
 
