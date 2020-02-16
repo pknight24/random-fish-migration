@@ -1,14 +1,16 @@
-function [results] = main(nsims = 100, nt = 50)
+function [results] = main(nt = 50)
   load("initial_temp_2013");
-  initial_temps = initial_temp_2013(:,7);
-  opt = 12.5;
+  initial_temps = initial_temp_2013(:,5);
+  opt = 12;
   R = 0.05;
-  results = zeros(length(initial_temps), 15);
+  conditional_results = zeros(15, 15);
+  results = zeros(15,1);
   for i = 1:15
     initial_node = i;
-    for j = 1:nsims
-      results(:,i) = results(:,i) + simulate(initial_node, initial_temps, opt, nt, R);
-    end
+    conditional_results(:,i) = simulate(initial_node, initial_temps, opt, nt, R);
+  end
+  for i = 1:15
+    results(i) = sum(conditional_results(i,:)) .* (1/15);
   end
   
 end
