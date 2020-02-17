@@ -1,8 +1,7 @@
-function [results] = main(nt = 50)
+function [results] = main(nt, month, R)
   load("initial_temp_2013");
-  initial_temps = initial_temp_2013(:,5);
+  initial_temps = initial_temp_2013(:,month);
   opt = 12;
-  R = 0.05;
   conditional_results = zeros(15, 15);
   results = zeros(15,1);
   for i = 1:15
